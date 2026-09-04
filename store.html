@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BDAWY STORE | المتجر</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<header class="top-header">
+
+    <div class="logo">
+        BDAWY <span>STORE</span>
+    </div>
+
+    <div class="header-actions">
+
+        <span id="userName">
+            جاري التحميل...
+        </span>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+        >
+            🚪 خروج
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="store-page">
+
+    <!-- ========================= -->
+    <!-- WELCOME -->
+    <!-- ========================= -->
+
+    <section class="welcome-box">
+
+        <div>
+
+            <span class="badge">
+                🎮 BDAWY STORE
+            </span>
+
+            <h1>
+                أهلاً بيك
+                <span id="welcomeName"></span> 👋
+            </h1>
+
+            <p>
+                اختار اللعبة اللي عايز تشحنها
+                وابدأ طلبك.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- GAMES -->
+    <!-- ========================= -->
+
+    <section>
+
+        <div class="section-title">
+
+            <span>
+                🎮 الألعاب
+            </span>
+
+            <h2>
+                اختار اللعبة
+            </h2>
+
+        </div>
+
+
+        <div
+            id="gamesContainer"
+            class="games-grid"
+        >
+
+            <div class="loading-card">
+
+                <div class="loader"></div>
+
+                <p>
+                    جاري تحميل الألعاب...
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- SERVICES -->
+    <!-- ========================= -->
+
+    <section
+        id="servicesSection"
+        class="services-section hidden"
+    >
+
+        <div class="section-title">
+
+            <span>
+                📦 الباقات
+            </span>
+
+            <h2 id="selectedGameName">
+                الباقات المتاحة
+            </h2>
+
+            <button
+                id="backGamesBtn"
+                class="secondary-btn"
+            >
+                ← تغيير اللعبة
+            </button>
+
+        </div>
+
+
+        <div
+            id="servicesContainer"
+            class="services-grid"
+        ></div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- ORDER MODAL -->
+    <!-- ========================= -->
+
+    <div
+        id="orderModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-card">
+
+            <button
+                id="closeModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-icon">
+                🎮
+            </div>
+
+
+            <h2>
+                تأكيد الطلب
+            </h2>
+
+
+            <div
+                id="selectedServiceInfo"
+                class="selected-service"
+            ></div>
+
+
+            <form id="orderForm">
+
+                <div class="input-group">
+
+                    <label>
+                        🆔 ID اللاعب
+                    </label>
+
+                    <input
+                        type="text"
+                        id="playerId"
+                        placeholder="اكتب ID اللاعب"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        📱 رقم الموبايل الخاص بك
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="01xxxxxxxxx"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        💳 الرقم الذي تم التحويل منه
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="senderPhone"
+                        placeholder="اكتب الرقم الذي حولت منه"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="payment-box">
+
+                    <div>
+                        💰 المبلغ المطلوب
+                    </div>
+
+                    <strong id="orderPrice">
+                        0 جنيه
+                    </strong>
+
+                </div>
+
+
+                <div
+                    id="paymentNumberBox"
+                    class="payment-number-box"
+                >
+
+                    <p>
+                        💳 حوّل المبلغ إلى الرقم:
+                    </p>
+
+                    <strong
+                        id="paymentNumber"
+                    >
+                        جاري التحميل...
+                    </strong>
+
+                </div>
+
+
+                <div class="warning-box">
+
+                    ⚠️ بعد التحويل اكتب
+                    الرقم الذي حولت منه
+                    في الخانة بالأعلى.
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="submitOrderBtn"
+                    class="auth-submit"
+                >
+                    🚀 إرسال الطلب
+                </button>
+
+
+                <div
+                    id="orderMessage"
+                    class="form-message"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MY ORDERS -->
+    <!-- ========================= -->
+
+    <section class="orders-section">
+
+        <div class="section-title">
+
+            <span>
+                📋 طلباتي
+            </span>
+
+            <h2>
+                متابعة الطلبات
+            </h2>
+
+        </div>
+
+
+        <div
+            id="myOrdersContainer"
+            class="orders-grid"
+        >
+
+            <div class="loading-card">
+
+                جاري تحميل الطلبات...
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        BDAWY STORE
+    </div>
+
+    <p>
+        © 2026 BDAWY STORE
+    </p>
+
+</footer>
+
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js">
+</script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js">
+</script>
+
+
+<script>
+
+VANTA.NET({
+
+    el: "#background",
+
+    mouseControls: true,
+
+    touchControls: true,
+
+    gyroControls: false,
+
+    minHeight: 200,
+
+    minWidth: 200,
+
+    scale: 1,
+
+    scaleMobile: 1,
+
+    color: 0xff0000,
+
+    backgroundColor: 0x030303,
+
+    points: 12,
+
+    maxDistance: 22,
+
+    spacing: 18
+
+});
+
+</script>
+
+
+<script type="module" src="store.js"></script>
+
+<audio id="siteAudio" src="site-audio.mp3.mp3" autoplay loop preload="auto" aria-hidden="true"></audio>
+<script>
+    (() => {
+        const audio = document.getElementById("siteAudio");
+        const startAudio = () => {
+            audio.play().then(() => {
+                ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+                    document.removeEventListener(eventName, startAudio);
+                });
+            }).catch(() => {});
+        };
+
+        startAudio();
+        ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+            document.addEventListener(eventName, startAudio, { once: true, passive: true });
+        });
+    })();
+</script>
+</body>
+
+</html>

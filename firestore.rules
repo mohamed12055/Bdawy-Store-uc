@@ -1,0 +1,125 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    /* =========================
+       AUTH
+    ========================= */
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(
+          /databases/$(database)/documents/users/$(request.auth.uid)
+        )
+        && get(
+          /databases/$(database)/documents/users/$(request.auth.uid)
+        ).data.role == "admin";
+    }
+
+
+    /* =========================
+       USERS
+    ========================= */
+
+    match /users/{userId} {
+
+      // المستخدم ينشئ حسابه لنفسه
+      allow create: if signedIn()
+                    && request.auth.uid == userId;
+
+      // المستخدم يقرأ ويعدل حسابه
+      allow read, update: if signedIn()
+                          && request.auth.uid == userId;
+
+      // الأدمن يقرأ ويعدل المستخدمين
+      allow read, update: if isAdmin();
+
+      // منع الحذف
+      allow delete: if false;
+    }
+
+
+    /* =========================
+       GAMES
+    ========================= */
+
+    match /games/{gameId} {
+
+      // الجميع يستطيع مشاهدة الألعاب
+      allow read: if true;
+
+      // الأدمن فقط
+      allow create, update, delete: if isAdmin();
+
+
+      /* =========================
+         SERVICES
+      ========================= */
+
+      match /services/{serviceId} {
+
+        // الجميع يستطيع مشاهدة الباقات
+        allow read: if true;
+
+        // الأدمن فقط يستطيع الإدارة
+        allow create, update, delete: if isAdmin();
+      }
+    }
+
+
+    /* =========================
+       ORDERS
+    ========================= */
+
+    match /orders/{orderId} {
+
+      // المستخدم ينشئ طلب لنفسه فقط
+      allow create: if signedIn()
+                    && request.resource.data.userId == request.auth.uid;
+
+      // المستخدم يشاهد طلباته
+      // الأدمن يشاهد كل الطلبات
+      allow read: if signedIn()
+                  && (
+                    resource.data.userId == request.auth.uid
+                    || isAdmin()
+                  );
+
+      // الأدمن فقط يعدل الطلبات
+      allow update: if isAdmin();
+
+      // الأدمن فقط يحذف الطلبات
+      allow delete: if isAdmin();
+    }
+
+
+    /* =========================
+       SETTINGS
+    ========================= */
+
+    match /settings/{settingId} {
+
+      // المستخدم يحتاج قراءة رقم الدفع
+      allow read: if signedIn();
+
+      // الأدمن فقط يعدل الإعدادات
+      allow create, update, delete: if isAdmin();
+    }
+
+
+    /* =========================
+       منع أي Collections أخرى
+    ========================= */
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+  }
+}

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>إنشاء حساب | BDAWY STORE</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<div id="background"></div>
+
+
+<header class="top-header">
+
+    <div class="logo">
+        BDAWY <span>STORE</span>
+    </div>
+
+    <a
+        href="index.html"
+        class="secondary-btn"
+    >
+        🏠 الرئيسية
+    </a>
+
+</header>
+
+
+
+<main class="auth-page">
+
+    <div class="auth-card">
+
+
+        <div class="auth-logo">
+
+            BDAWY <span>STORE</span>
+
+        </div>
+
+
+        <div class="auth-icon">
+
+            👤
+
+        </div>
+
+
+        <h1>
+
+            إنشاء حساب جديد
+
+        </h1>
+
+
+        <p class="auth-subtitle">
+
+            اعمل حساب وابدأ اطلب شحن ألعابك بسهولة
+
+        </p>
+
+
+
+        <form id="registerForm">
+
+
+            <div class="input-group">
+
+                <label>
+                    الاسم
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="اكتب اسمك"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    البريد الإلكتروني
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    كلمة المرور
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="6 أحرف على الأقل"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    تأكيد كلمة المرور
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="اكتب كلمة المرور مرة أخرى"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="toggleConfirmPassword"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="auth-submit"
+                id="registerBtn"
+            >
+
+                ✨ إنشاء الحساب
+
+            </button>
+
+
+
+            <div
+                id="registerMessage"
+                class="form-message"
+            ></div>
+
+
+        </form>
+
+
+
+        <div class="auth-divider">
+
+            أو
+
+        </div>
+
+
+
+        <p class="register-text">
+
+            عندك حساب بالفعل؟
+
+            <a href="login.html">
+                تسجيل الدخول
+            </a>
+
+        </p>
+
+
+
+        <a
+            href="index.html"
+            class="back-home"
+        >
+
+            ← الرجوع للصفحة الرئيسية
+
+        </a>
+
+
+    </div>
+
+</main>
+
+
+
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js">
+</script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js">
+</script>
+
+
+<script>
+
+VANTA.NET({
+
+    el: "#background",
+
+    mouseControls: true,
+
+    touchControls: true,
+
+    gyroControls: false,
+
+    minHeight: 200,
+
+    minWidth: 200,
+
+    scale: 1,
+
+    scaleMobile: 1,
+
+    color: 0xff0000,
+
+    backgroundColor: 0x030303,
+
+    points: 12,
+
+    maxDistance: 22,
+
+    spacing: 18
+
+});
+
+</script>
+
+
+<script type="module">
+
+import {
+    auth,
+    db
+} from "./firebase.js";
+
+
+import {
+
+    createUserWithEmailAndPassword,
+    updateProfile
+
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
+    doc,
+    setDoc,
+    serverTimestamp
+
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+const form =
+    document.getElementById(
+        "registerForm"
+    );
+
+
+const nameInput =
+    document.getElementById(
+        "name"
+    );
+
+
+const emailInput =
+    document.getElementById(
+        "email"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "password"
+    );
+
+
+const confirmPasswordInput =
+    document.getElementById(
+        "confirmPassword"
+    );
+
+
+const registerBtn =
+    document.getElementById(
+        "registerBtn"
+    );
+
+
+const message =
+    document.getElementById(
+        "registerMessage"
+    );
+
+
+const togglePassword =
+    document.getElementById(
+        "togglePassword"
+    );
+
+
+const toggleConfirmPassword =
+    document.getElementById(
+        "toggleConfirmPassword"
+    );
+
+
+
+/* =========================
+   إظهار كلمة المرور
+========================= */
+
+togglePassword.addEventListener(
+    "click",
+    () => {
+
+        if (
+            passwordInput.type ===
+            "password"
+        ) {
+
+            passwordInput.type =
+                "text";
+
+            togglePassword.textContent =
+                "🙈";
+
+        } else {
+
+            passwordInput.type =
+                "password";
+
+            togglePassword.textContent =
+                "👁️";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   إظهار تأكيد كلمة المرور
+========================= */
+
+toggleConfirmPassword.addEventListener(
+    "click",
+    () => {
+
+        if (
+            confirmPasswordInput.type ===
+            "password"
+        ) {
+
+            confirmPasswordInput.type =
+                "text";
+
+            toggleConfirmPassword.textContent =
+                "🙈";
+
+        } else {
+
+            confirmPasswordInput.type =
+                "password";
+
+            toggleConfirmPassword.textContent =
+                "👁️";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   إنشاء الحساب
+========================= */
+
+form.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+
+        const email =
+            emailInput.value.trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+        const confirmPassword =
+            confirmPasswordInput.value;
+
+
+
+        if (
+            name.length <
+            2
+        ) {
+
+            showMessage(
+                "❌ اكتب اسم صحيح.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+
+        if (
+            password.length <
+            6
+        ) {
+
+            showMessage(
+                "❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+
+        if (
+            password !==
+            confirmPassword
+        ) {
+
+            showMessage(
+                "❌ كلمتا المرور غير متطابقتين.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+
+        registerBtn.disabled =
+            true;
+
+
+        registerBtn.textContent =
+            "⏳ جاري إنشاء الحساب...";
+
+
+
+        try {
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            const user =
+                result.user;
+
+
+
+            /* حفظ اسم المستخدم */
+
+            await updateProfile(
+                user,
+                {
+                    displayName:
+                        name
+                }
+            );
+
+
+
+            /* إنشاء بيانات المستخدم في Firestore */
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                ),
+                {
+
+                    uid:
+                        user.uid,
+
+                    name:
+                        name,
+
+                    email:
+                        email,
+
+                    role:
+                        "user",
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+
+
+            showMessage(
+                "✅ تم إنشاء الحساب بنجاح! جاري الدخول...",
+                "success"
+            );
+
+
+
+            setTimeout(
+                () => {
+
+                    window.location.href =
+                        "store.html";
+
+                },
+                900
+            );
+
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            let text =
+                "❌ حدث خطأ أثناء إنشاء الحساب.";
+
+
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                text =
+                    "❌ البريد الإلكتروني مستخدم بالفعل.";
+
+            }
+
+
+
+            else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                text =
+                    "❌ البريد الإلكتروني غير صحيح.";
+
+            }
+
+
+
+            else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                text =
+                    "❌ كلمة المرور ضعيفة.";
+
+            }
+
+
+
+            showMessage(
+                text,
+                "error"
+            );
+
+        }
+
+
+
+        registerBtn.disabled =
+            false;
+
+
+        registerBtn.textContent =
+            "✨ إنشاء الحساب";
+
+    }
+);
+
+
+
+/* =========================
+   الرسائل
+========================= */
+
+function showMessage(
+    text,
+    type
+) {
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "form-message " +
+        type;
+
+}
+
+</script>
+
+
+<audio id="siteAudio" src="site-audio.mp3.mp3" autoplay loop preload="auto" aria-hidden="true"></audio>
+<script>
+    (() => {
+        const audio = document.getElementById("siteAudio");
+        const startAudio = () => {
+            audio.play().then(() => {
+                ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+                    document.removeEventListener(eventName, startAudio);
+                });
+            }).catch(() => {});
+        };
+
+        startAudio();
+        ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+            document.addEventListener(eventName, startAudio, { once: true, passive: true });
+        });
+    })();
+</script>
+</body>
+
+</html>

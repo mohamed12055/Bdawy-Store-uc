@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>لوحة التحكم | BDAWY STORE</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<header class="top-header">
+
+<div class="logo">
+    BDAWY <span>STORE</span>
+</div>
+
+
+<div class="admin-header">
+
+    <span id="adminName">
+        👑 الأدمن
+    </span>
+
+
+    <button
+        id="logoutBtn"
+        class="logout-btn"
+    >
+        تسجيل الخروج
+    </button>
+
+</div>
+
+</header>
+
+<main class="admin-page">
+
+<!-- =========================
+     العنوان
+========================== -->
+
+<section class="admin-welcome">
+
+    <div>
+
+        <span class="admin-badge">
+            👑 ADMIN PANEL
+        </span>
+
+        <h1>
+            لوحة تحكم BDAWY STORE
+        </h1>
+
+        <p>
+            من هنا تقدر تتحكم في الألعاب والباقات والطلبات.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     الإحصائيات
+========================== -->
+
+<section class="stats-grid">
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🎮
+        </div>
+
+        <div>
+
+            <span>
+                الألعاب
+            </span>
+
+            <strong id="gamesCount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📦
+        </div>
+
+        <div>
+
+            <span>
+                الباقات
+            </span>
+
+            <strong id="servicesCount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🧾
+        </div>
+
+        <div>
+
+            <span>
+                الطلبات
+            </span>
+
+            <strong id="ordersCount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            👤
+        </div>
+
+        <div>
+
+            <span>
+                المستخدمين
+            </span>
+
+            <strong id="usersCount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     إضافة لعبة
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                🎮
+            </span>
+
+            <h2>
+                إضافة لعبة جديدة
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <form id="addGameForm">
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    اسم اللعبة
+                </label>
+
+                <input
+                    type="text"
+                    id="gameName"
+                    placeholder="مثال: Free Fire"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    صورة اللعبة
+                </label>
+
+                <input
+                    type="file"
+                    id="gameImage"
+                    accept="image/png,image/jpeg,image/webp"
+                    required
+                >
+
+            </div>
+
+
+        </div>
+
+
+
+        <div
+            id="gameImagePreview"
+            class="image-preview"
+        ></div>
+
+
+
+        <button
+            type="submit"
+            class="primary-btn admin-submit"
+            id="addGameBtn"
+        >
+
+            ➕ إضافة اللعبة
+
+        </button>
+
+
+
+        <div
+            id="gameMessage"
+            class="form-message"
+        ></div>
+
+
+    </form>
+
+</section>
+
+
+
+<!-- =========================
+     الألعاب الموجودة
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                🎮
+            </span>
+
+            <h2>
+                إدارة الألعاب
+            </h2>
+
+        </div>
+
+
+        <button
+            id="refreshGamesBtn"
+            class="small-btn"
+        >
+            🔄 تحديث
+        </button>
+
+    </div>
+
+
+
+    <div
+        id="adminGamesContainer"
+        class="admin-games-grid"
+    >
+
+        <div class="loading-card">
+
+            <div class="loader"></div>
+
+            <p>
+                ⏳ جاري تحميل الألعاب...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     إضافة باقة
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                📦
+            </span>
+
+            <h2>
+                إضافة باقة للعبة
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <form id="addServiceForm">
+
+
+        <div class="form-grid">
+
+
+            <div class="input-group">
+
+                <label>
+                    اختر اللعبة
+                </label>
+
+                <select
+                    id="serviceGame"
+                    required
+                >
+
+                    <option value="">
+                        اختر اللعبة
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    اسم الباقة
+                </label>
+
+                <input
+                    type="text"
+                    id="serviceName"
+                    placeholder="مثال: 100 جوهرة"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    السعر بالجنيه
+                </label>
+
+                <input
+                    type="number"
+                    id="servicePrice"
+                    placeholder="مثال: 50"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="input-group">
+
+                <label>
+                    وصف الباقة
+                </label>
+
+                <input
+                    type="text"
+                    id="serviceDescription"
+                    placeholder="مثال: شحن 100 جوهرة"
+                >
+
+            </div>
+
+
+        </div>
+
+
+
+        <button
+            type="submit"
+            class="primary-btn admin-submit"
+            id="addServiceBtn"
+        >
+
+            ➕ إضافة الباقة
+
+        </button>
+
+
+
+        <div
+            id="serviceMessage"
+            class="form-message"
+        ></div>
+
+
+    </form>
+
+</section>
+
+
+
+<!-- =========================
+     إدارة الباقات
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                📦
+            </span>
+
+            <h2>
+                إدارة الباقات
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        id="adminServicesContainer"
+        class="admin-services-container"
+    >
+
+        <div class="empty-card">
+
+            اختر لعبة من القائمة السابقة لإدارة باقاتها.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     رقم الدفع
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                💳
+            </span>
+
+            <h2>
+                رقم الدفع / التحويل
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="payment-settings">
+
+
+        <div class="input-group">
+
+            <label>
+                رقم التحويل الذي يظهر للمستخدم
+            </label>
+
+            <input
+                type="text"
+                id="paymentNumberInput"
+                placeholder="مثال: 01000000000"
+            >
+
+        </div>
+
+
+
+        <button
+            id="savePaymentNumberBtn"
+            class="primary-btn"
+        >
+
+            💾 حفظ الرقم
+
+        </button>
+
+
+
+        <div
+            id="paymentMessage"
+            class="form-message"
+        ></div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     الطلبات
+========================== -->
+
+<section class="admin-card">
+
+
+    <div class="admin-card-title">
+
+        <div>
+
+            <span>
+                🧾
+            </span>
+
+            <h2>
+                طلبات العملاء
+            </h2>
+
+        </div>
+
+
+        <button
+            id="refreshOrdersBtn"
+            class="small-btn"
+        >
+
+            🔄 تحديث
+
+        </button>
+
+    </div>
+
+
+
+    <div
+        id="adminOrdersContainer"
+        class="admin-orders-container"
+    >
+
+        <div class="loading-card">
+
+            <div class="loader"></div>
+
+            <p>
+                ⏳ جاري تحميل الطلبات...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="footer-logo">
+    BDAWY STORE
+</div>
+
+<p>
+    لوحة تحكم الإدارة
+</p>
+
+</footer>
+
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js">
+</script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js">
+</script>
+
+
+<script>
+
+VANTA.NET({
+
+    el: "#background",
+
+    mouseControls: true,
+
+    touchControls: true,
+
+    gyroControls: false,
+
+    minHeight: 200,
+
+    minWidth: 200,
+
+    scale: 1,
+
+    scaleMobile: 1,
+
+    color: 0xff0000,
+
+    backgroundColor: 0x030303,
+
+    points: 12,
+
+    maxDistance: 22,
+
+    spacing: 18
+
+});
+
+</script>
+
+<script
+    type="module"
+    src="admin.js"
+></script>
+
+<audio id="siteAudio" src="site-audio.mp3.mp3" autoplay loop preload="auto" aria-hidden="true"></audio>
+<script>
+    (() => {
+        const audio = document.getElementById("siteAudio");
+        const startAudio = () => {
+            audio.play().then(() => {
+                ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+                    document.removeEventListener(eventName, startAudio);
+                });
+            }).catch(() => {});
+        };
+
+        startAudio();
+        ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
+            document.addEventListener(eventName, startAudio, { once: true, passive: true });
+        });
+    })();
+</script>
+</body>
+
+</html>
