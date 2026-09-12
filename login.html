@@ -4,387 +4,949 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="theme-color" content="#050505">
 
     <title>تسجيل الدخول | BDAWY STORE</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <style>
+        /* =====================================================
+           LOGIN PAGE - LOCAL FIX
+           لا يعتمد على style.css في زر Google
+        ===================================================== */
+
+        .bdawy-login-page {
+            width: 100%;
+            min-height: calc(100vh - 80px);
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            padding: 100px 18px 40px !important;
+
+            position: relative !important;
+            z-index: 10 !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .bdawy-login-card {
+            width: 100% !important;
+            max-width: 470px !important;
+
+            padding: 38px 30px !important;
+
+            border-radius: 24px !important;
+
+            background:
+                rgba(10, 10, 10, 0.94) !important;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10) !important;
+
+            box-shadow:
+                0 20px 70px rgba(0, 0, 0, 0.60) !important;
+
+            box-sizing: border-box !important;
+
+            position: relative !important;
+            z-index: 20 !important;
+
+            overflow: visible !important;
+        }
+
+        .bdawy-login-logo {
+            text-align: center !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 28px !important;
+
+            font-weight: 900 !important;
+
+            color: #ffffff !important;
+
+            margin-bottom: 14px !important;
+        }
+
+        .bdawy-login-logo span {
+            color: #ff2020 !important;
+        }
+
+        .bdawy-login-title {
+            text-align: center !important;
+
+            color: #ffffff !important;
+
+            font-size: 25px !important;
+
+            font-weight: 900 !important;
+
+            margin: 0 0 8px !important;
+        }
+
+        .bdawy-login-subtitle {
+            text-align: center !important;
+
+            color: rgba(255, 255, 255, 0.60) !important;
+
+            font-size: 13px !important;
+
+            line-height: 1.8 !important;
+
+            margin: 0 0 25px !important;
+        }
+
+        .bdawy-input-group {
+            width: 100% !important;
+
+            margin-bottom: 17px !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .bdawy-input-group label {
+            display: block !important;
+
+            color: #ffffff !important;
+
+            font-size: 13px !important;
+
+            font-weight: 700 !important;
+
+            margin-bottom: 8px !important;
+        }
+
+        .bdawy-input-group input {
+            width: 100% !important;
+
+            height: 52px !important;
+
+            padding: 0 15px !important;
+
+            border-radius: 12px !important;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12) !important;
+
+            background:
+                rgba(255, 255, 255, 0.055) !important;
+
+            color: #ffffff !important;
+
+            outline: none !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 14px !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .bdawy-input-group input:focus {
+            border-color: #ff2020 !important;
+
+            box-shadow:
+                0 0 0 3px rgba(255, 32, 32, 0.10) !important;
+        }
+
+        .bdawy-input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.35) !important;
+        }
+
+        .bdawy-password-box {
+            width: 100% !important;
+
+            position: relative !important;
+        }
+
+        .bdawy-password-box input {
+            padding-left: 50px !important;
+        }
+
+        .bdawy-password-toggle {
+            position: absolute !important;
+
+            left: 7px !important;
+
+            top: 50% !important;
+
+            transform: translateY(-50%) !important;
+
+            width: 38px !important;
+
+            height: 38px !important;
+
+            border: 0 !important;
+
+            background: transparent !important;
+
+            color: #ffffff !important;
+
+            font-size: 18px !important;
+
+            cursor: pointer !important;
+
+            z-index: 5 !important;
+        }
+
+        .bdawy-login-submit {
+            width: 100% !important;
+
+            min-height: 53px !important;
+
+            border: 0 !important;
+
+            border-radius: 13px !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff3030,
+                    #b90000
+                ) !important;
+
+            color: #ffffff !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 15px !important;
+
+            font-weight: 900 !important;
+
+            cursor: pointer !important;
+
+            margin-top: 5px !important;
+
+            box-shadow:
+                0 10px 25px rgba(255, 0, 0, 0.18) !important;
+
+            transition: 0.25s ease !important;
+        }
+
+        .bdawy-login-submit:hover {
+            transform: translateY(-2px) !important;
+        }
+
+        .bdawy-login-submit:disabled {
+            opacity: 0.65 !important;
+
+            cursor: not-allowed !important;
+
+            transform: none !important;
+        }
+
+        .bdawy-login-message {
+            width: 100% !important;
+
+            min-height: 24px !important;
+
+            margin-top: 12px !important;
+
+            text-align: center !important;
+
+            font-size: 13px !important;
+
+            font-weight: 700 !important;
+
+            line-height: 1.7 !important;
+
+            box-sizing: border-box !important;
+        }
+
+        /* =====================================================
+           DIVIDER
+        ===================================================== */
+
+        .bdawy-google-divider {
+            width: 100% !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            gap: 12px !important;
+
+            margin: 22px 0 17px !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .bdawy-google-divider-line {
+            flex: 1 !important;
+
+            height: 1px !important;
+
+            background:
+                rgba(255, 255, 255, 0.13) !important;
+        }
+
+        .bdawy-google-divider-text {
+            color:
+                rgba(255, 255, 255, 0.50) !important;
+
+            font-size: 13px !important;
+
+            font-weight: 600 !important;
+
+            white-space: nowrap !important;
+        }
+
+        /* =====================================================
+           GOOGLE BUTTON
+        ===================================================== */
+
+        #googleLoginBtn {
+            width: 100% !important;
+
+            min-width: 0 !important;
+
+            min-height: 54px !important;
+
+            height: auto !important;
+
+            padding: 12px 16px !important;
+
+            margin: 0 !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            gap: 12px !important;
+
+            position: relative !important;
+
+            z-index: 9999 !important;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
+
+            overflow: visible !important;
+
+            box-sizing: border-box !important;
+
+            border:
+                1px solid #dddddd !important;
+
+            border-radius: 13px !important;
+
+            background: #ffffff !important;
+
+            color: #202124 !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 14px !important;
+
+            font-weight: 700 !important;
+
+            line-height: 1.2 !important;
+
+            cursor: pointer !important;
+
+            appearance: none !important;
+
+            -webkit-appearance: none !important;
+
+            box-shadow:
+                0 7px 22px rgba(0, 0, 0, 0.25) !important;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease !important;
+        }
+
+        #googleLoginBtn:hover {
+            background: #f7f7f7 !important;
+
+            transform: translateY(-2px) !important;
+
+            box-shadow:
+                0 11px 28px rgba(0, 0, 0, 0.35) !important;
+        }
+
+        #googleLoginBtn:active {
+            transform: translateY(0) !important;
+        }
+
+        #googleLoginBtn:disabled {
+            opacity: 0.65 !important;
+
+            cursor: wait !important;
+
+            transform: none !important;
+        }
+
+        .bdawy-google-icon {
+            width: 29px !important;
+
+            height: 29px !important;
+
+            min-width: 29px !important;
+
+            min-height: 29px !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+
+            justify-content: center !important;
+
+            flex-shrink: 0 !important;
+
+            background: #ffffff !important;
+
+            color: #4285F4 !important;
+
+            border-radius: 50% !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 21px !important;
+
+            font-weight: 900 !important;
+
+            line-height: 1 !important;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
+        }
+
+        .bdawy-google-text {
+            display: block !important;
+
+            color: #202124 !important;
+
+            font-family: Arial, sans-serif !important;
+
+            font-size: 14px !important;
+
+            font-weight: 700 !important;
+
+            line-height: 1.4 !important;
+
+            visibility: visible !important;
+
+            opacity: 1 !important;
+
+            white-space: nowrap !important;
+        }
+
+        /* =====================================================
+           REGISTER
+        ===================================================== */
+
+        .bdawy-register-box {
+            width: 100% !important;
+
+            text-align: center !important;
+
+            margin-top: 23px !important;
+
+            box-sizing: border-box !important;
+        }
+
+        .bdawy-register-box p {
+            display: inline !important;
+
+            color:
+                rgba(255, 255, 255, 0.55) !important;
+
+            font-size: 13px !important;
+        }
+
+        .bdawy-register-box a {
+            display: inline-block !important;
+
+            margin-right: 5px !important;
+
+            color: #ff3030 !important;
+
+            font-size: 13px !important;
+
+            font-weight: 800 !important;
+
+            text-decoration: none !important;
+        }
+
+        .bdawy-register-box a:hover {
+            text-decoration: underline !important;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .bdawy-login-page {
+                min-height: 100vh !important;
+
+                padding:
+                    95px 14px 30px !important;
+
+                align-items: center !important;
+            }
+
+            .bdawy-login-card {
+                width: 100% !important;
+
+                max-width: 430px !important;
+
+                padding:
+                    28px 18px !important;
+
+                border-radius: 20px !important;
+            }
+
+            .bdawy-login-logo {
+                font-size: 25px !important;
+            }
+
+            .bdawy-login-title {
+                font-size: 22px !important;
+            }
+
+            .bdawy-login-subtitle {
+                font-size: 12px !important;
+            }
+
+            #googleLoginBtn {
+                min-height: 52px !important;
+
+                padding:
+                    11px 12px !important;
+            }
+
+            .bdawy-google-text {
+                font-size: 13px !important;
+            }
+
+        }
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .bdawy-login-page {
+                padding:
+                    90px 10px 25px !important;
+            }
+
+            .bdawy-login-card {
+                padding:
+                    24px 14px !important;
+            }
+
+            .bdawy-google-text {
+                font-size: 12px !important;
+            }
+
+            .bdawy-google-icon {
+                width: 27px !important;
+
+                height: 27px !important;
+
+                min-width: 27px !important;
+            }
+
+        }
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+
+            .bdawy-login-page {
+                padding:
+                    105px 25px 45px !important;
+            }
+
+            .bdawy-login-card {
+                max-width: 500px !important;
+
+                padding:
+                    40px 35px !important;
+            }
+
+        }
+
+        /* =====================================================
+           PREVENT OLD CSS FROM HIDING GOOGLE
+        ===================================================== */
+
+        .bdawy-login-card #googleLoginBtn,
+        .bdawy-login-card #googleLoginBtn span {
+            visibility: visible !important;
+
+            opacity: 1 !important;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-<div id="background"></div>
+    <!-- BACKGROUND -->
+
+    <div id="background"></div>
 
 
-<header class="top-header">
+    <!-- HEADER -->
 
-    <div class="logo">
-        BDAWY <span>STORE</span>
-    </div>
+    <header class="top-header">
 
-    <a
-        href="index.html"
-        class="secondary-btn"
-    >
-        🏠 الرئيسية
-    </a>
-
-</header>
-
-
-<main class="auth-page login-page">
-
-    <div class="auth-card">
-
-        <div class="auth-logo">
+        <div class="logo">
             BDAWY <span>STORE</span>
         </div>
 
+        <a href="index.html" class="header-btn">
+            الرئيسية
+        </a>
 
-        <div class="auth-icon">
-            🔐
-        </div>
-
-
-        <h1>
-            أهلاً بيك 👋
-        </h1>
+    </header>
 
 
-        <p class="auth-subtitle">
-            سجل دخولك عشان تقدر تطلب شحن الألعاب
-        </p>
+    <!-- LOGIN -->
 
+    <main class="bdawy-login-page">
 
-        <form id="loginForm">
+        <div class="bdawy-login-card">
 
-
-            <div class="input-group">
-
-                <label>
-                    البريد الإلكتروني
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="example@gmail.com"
-                    autocomplete="email"
-                    required
-                >
-
+            <div class="bdawy-login-logo">
+                BDAWY <span>STORE</span>
             </div>
 
+            <h1 class="bdawy-login-title">
+                تسجيل الدخول
+            </h1>
 
-            <div class="input-group">
+            <p class="bdawy-login-subtitle">
+                سجل دخولك للوصول إلى متجر الألعاب والباقات
+            </p>
 
-                <label>
-                    كلمة المرور
-                </label>
 
-                <div class="password-box">
+            <!-- EMAIL LOGIN -->
+
+            <form id="loginForm">
+
+                <div class="bdawy-input-group">
+
+                    <label for="email">
+                        البريد الإلكتروني
+                    </label>
 
                     <input
-                        type="password"
-                        id="password"
-                        placeholder="اكتب كلمة المرور"
-                        autocomplete="current-password"
+                        type="email"
+                        id="email"
+                        placeholder="example@gmail.com"
+                        autocomplete="email"
                         required
                     >
 
-                    <button
-                        type="button"
-                        class="password-toggle"
-                        id="togglePassword"
-                    >
-                        👁️
-                    </button>
+                </div>
+
+
+                <div class="bdawy-input-group">
+
+                    <label for="password">
+                        كلمة المرور
+                    </label>
+
+                    <div class="bdawy-password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="bdawy-password-toggle"
+                            aria-label="إظهار كلمة المرور"
+                        >
+                            👁
+                        </button>
+
+                    </div>
 
                 </div>
+
+
+                <button
+                    type="submit"
+                    id="loginBtn"
+                    class="bdawy-login-submit"
+                >
+                    تسجيل الدخول
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="loginMessage"
+                class="bdawy-login-message"
+            ></div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="bdawy-google-divider">
+
+                <span class="bdawy-google-divider-line"></span>
+
+                <span class="bdawy-google-divider-text">
+                    أو
+                </span>
+
+                <span class="bdawy-google-divider-line"></span>
 
             </div>
 
 
+            <!-- GOOGLE LOGIN -->
+
             <button
-                type="submit"
-                class="auth-submit"
-                id="loginBtn"
+                type="button"
+                id="googleLoginBtn"
             >
-                🔐 تسجيل الدخول
+
+                <span class="bdawy-google-icon">
+                    G
+                </span>
+
+                <span class="bdawy-google-text">
+                    تسجيل الدخول باستخدام Google
+                </span>
+
             </button>
 
 
-            <div
-                id="loginMessage"
-                class="form-message"
-            ></div>
+            <!-- REGISTER -->
 
+            <div class="bdawy-register-box">
 
-        </form>
+                <p>
+                    ليس لديك حساب؟
+                </p>
 
+                <a href="register.html">
+                    إنشاء حساب جديد
+                </a>
 
-        <div class="auth-divider">
-            أو
+            </div>
+
         </div>
 
+    </main>
 
-        <p class="register-text">
 
-            مش عندك حساب؟
+    <!-- AUDIO -->
 
-            <a href="register.html">
-                إنشاء حساب جديد
-            </a>
+    <audio
+        id="siteAudio"
+        src="site-audio.mp3.mp3"
+        loop
+    ></audio>
 
-        </p>
 
+    <!-- VANTA -->
 
-        <a
-            href="index.html"
-            class="back-home"
-        >
-            ← الرجوع للصفحة الرئيسية
-        </a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
 
-    </div>
 
-</main>
+    <!-- FIREBASE LOGIN -->
 
+    <script type="module">
 
+        import {
+            auth,
+            db
+        } from "./firebase.js";
 
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js">
-</script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js">
-</script>
+        import {
+            signInWithEmailAndPassword,
+            GoogleAuthProvider,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-<script>
+        import {
+            doc,
+            getDoc,
+            setDoc,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-VANTA.NET({
 
-    el: "#background",
-
-    mouseControls: true,
-
-    touchControls: true,
-
-    gyroControls: false,
-
-    minHeight: 200,
-
-    minWidth: 200,
-
-    scale: 1,
-
-    scaleMobile: 1,
-
-    color: 0xff0000,
-
-    backgroundColor: 0x030303,
-
-    points: 12,
-
-    maxDistance: 22,
-
-    spacing: 18
-
-});
-
-</script>
-
-<script type="module">
-
-import { auth, db } from "./firebase.js";
-
-
-import {
-
-    signInWithEmailAndPassword
-
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-import {
-
-    doc,
-    getDoc
-
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-const form =
-    document.getElementById(
-        "loginForm"
-    );
-
-
-const emailInput =
-    document.getElementById(
-        "email"
-    );
-
-
-const passwordInput =
-    document.getElementById(
-        "password"
-    );
-
-
-const loginBtn =
-    document.getElementById(
-        "loginBtn"
-    );
-
-
-const message =
-    document.getElementById(
-        "loginMessage"
-    );
-
-
-const togglePassword =
-    document.getElementById(
-        "togglePassword"
-    );
-
-
-/* إظهار وإخفاء كلمة المرور */
-
-togglePassword.addEventListener(
-    "click",
-    () => {
-
-        if (
-            passwordInput.type ===
-            "password"
-        ) {
-
-            passwordInput.type =
-                "text";
-
-            togglePassword.textContent =
-                "🙈";
-
-        } else {
-
-            passwordInput.type =
-                "password";
-
-            togglePassword.textContent =
-                "👁️";
-
-        }
-
-    }
-);
-
-
-/* تسجيل الدخول */
-
-form.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        const email =
-            emailInput.value.trim();
-
-
-        const password =
-            passwordInput.value;
-
-
-        if (!email || !password) {
-
-            showMessage(
-                "❌ اكتب البريد الإلكتروني وكلمة المرور.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        loginBtn.disabled =
-            true;
-
-
-        loginBtn.textContent =
-            "⏳ جاري تسجيل الدخول...";
-
+        /* =====================================================
+           VANTA
+        ===================================================== */
 
         try {
 
-            const result =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            const user =
-                result.user;
-
-
-            const userRef =
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                );
-
-
-            const userSnap =
-                await getDoc(
-                    userRef
-                );
-
-
             if (
-                !userSnap.exists()
+                typeof VANTA !== "undefined" &&
+                document.getElementById("background")
             ) {
 
-                showMessage(
-                    "❌ بيانات الحساب غير موجودة.",
-                    "error"
-                );
+                VANTA.NET({
 
+                    el: "#background",
 
-                return;
+                    mouseControls: true,
+
+                    touchControls: true,
+
+                    gyroControls: false,
+
+                    minHeight: 200,
+
+                    minWidth: 200,
+
+                    scale: 1,
+
+                    scaleMobile: 1,
+
+                    color: 0xff1010,
+
+                    backgroundColor: 0x030303,
+
+                    points: 13,
+
+                    maxDistance: 22,
+
+                    spacing: 18
+
+                });
 
             }
 
+        } catch (error) {
 
-            const userData =
-                userSnap.data();
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول بنجاح...",
-                "success"
+            console.log(
+                "Vanta Error:",
+                error
             );
 
+        }
 
-            setTimeout(
-                () => {
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const googleLoginBtn =
+            document.getElementById("googleLoginBtn");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+        const password =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        function showMessage(
+            text,
+            success = false
+        ) {
+
+            loginMessage.textContent = text;
+
+            loginMessage.style.color =
+                success
+                    ? "#35ff72"
+                    : "#ff3030";
+
+        }
+
+
+        /* =====================================================
+           REDIRECT
+        ===================================================== */
+
+        async function redirectUser(user) {
+
+            try {
+
+                const userRef =
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    );
+
+                const userSnapshot =
+                    await getDoc(userRef);
+
+
+                if (!userSnapshot.exists()) {
+
+                    showMessage(
+                        "❌ بيانات الحساب غير موجودة."
+                    );
+
+                    return;
+
+                }
+
+
+                const userData =
+                    userSnapshot.data();
+
+
+                showMessage(
+                    "✅ تم تسجيل الدخول بنجاح",
+                    true
+                );
+
+
+                setTimeout(() => {
 
                     if (
-                        userData.role ===
-                        "admin"
+                        userData.role === "admin"
                     ) {
 
                         window.location.href =
@@ -397,97 +959,461 @@ form.addEventListener(
 
                     }
 
-                },
-                700
-            );
+                }, 500);
 
+            } catch (error) {
 
-        } catch (error) {
+                console.error(
+                    "Redirect Error:",
+                    error
+                );
 
-            console.error(error);
-
-
-            let text =
-                "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.";
-
-
-            if (
-                error.code ===
-                "auth/invalid-email"
-            ) {
-
-                text =
-                    "❌ البريد الإلكتروني غير صحيح.";
+                showMessage(
+                    "❌ تعذر قراءة بيانات الحساب."
+                );
 
             }
-
-
-            if (
-                error.code ===
-                "auth/user-disabled"
-            ) {
-
-                text =
-                    "❌ هذا الحساب تم تعطيله.";
-
-            }
-
-
-            showMessage(
-                text,
-                "error"
-            );
 
         }
 
 
-        loginBtn.disabled =
-            false;
+        /* =====================================================
+           EMAIL LOGIN
+        ===================================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
 
 
-        loginBtn.textContent =
-            "🔐 تسجيل الدخول";
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
 
-    }
-);
+
+                const passwordValue =
+                    password.value;
 
 
-/* الرسائل */
+                if (
+                    !email ||
+                    !passwordValue
+                ) {
 
-function showMessage(
-    text,
-    type
-) {
+                    showMessage(
+                        "❌ اكتب البريد الإلكتروني وكلمة المرور."
+                    );
 
-    message.textContent =
-        text;
+                    return;
 
-    message.className =
-        "form-message " +
-        type;
+                }
 
-}
 
-</script>
+                loginBtn.disabled = true;
 
-<audio id="siteAudio" src="site-audio.mp3.mp3" autoplay loop preload="auto" aria-hidden="true"></audio>
-<script>
-    (() => {
-        const audio = document.getElementById("siteAudio");
-        const startAudio = () => {
-            audio.play().then(() => {
-                ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
-                    document.removeEventListener(eventName, startAudio);
-                });
-            }).catch(() => {});
-        };
+                loginBtn.textContent =
+                    "جاري تسجيل الدخول...";
 
-        startAudio();
-        ["pointerdown", "keydown", "touchstart"].forEach((eventName) => {
-            document.addEventListener(eventName, startAudio, { once: true, passive: true });
-        });
-    })();
-</script>
+
+                try {
+
+                    const credential =
+                        await signInWithEmailAndPassword(
+                            auth,
+                            email,
+                            passwordValue
+                        );
+
+
+                    await redirectUser(
+                        credential.user
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login Error:",
+                        error
+                    );
+
+
+                    if (
+                        error.code ===
+                        "auth/user-not-found" ||
+
+                        error.code ===
+                        "auth/wrong-password" ||
+
+                        error.code ===
+                        "auth/invalid-credential"
+                    ) {
+
+                        showMessage(
+                            "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/invalid-email"
+                    ) {
+
+                        showMessage(
+                            "❌ البريد الإلكتروني غير صحيح."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/user-disabled"
+                    ) {
+
+                        showMessage(
+                            "❌ هذا الحساب تم تعطيله."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/too-many-requests"
+                    ) {
+
+                        showMessage(
+                            "❌ محاولات كثيرة. حاول مرة أخرى لاحقًا."
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "❌ حدث خطأ أثناء تسجيل الدخول."
+                        );
+
+                    }
+
+                } finally {
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.textContent =
+                        "تسجيل الدخول";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           GOOGLE LOGIN
+        ===================================================== */
+
+        googleLoginBtn.addEventListener(
+            "click",
+            async () => {
+
+                googleLoginBtn.disabled = true;
+
+
+                googleLoginBtn.innerHTML = `
+                    <span
+                        class="bdawy-google-text"
+                        style="
+                            color:#202124 !important;
+                            display:block !important;
+                        "
+                    >
+                        جاري تسجيل الدخول باستخدام Google...
+                    </span>
+                `;
+
+
+                try {
+
+                    const provider =
+                        new GoogleAuthProvider();
+
+
+                    provider.setCustomParameters({
+                        prompt: "select_account"
+                    });
+
+
+                    const result =
+                        await signInWithPopup(
+                            auth,
+                            provider
+                        );
+
+
+                    const user =
+                        result.user;
+
+
+                    const userRef =
+                        doc(
+                            db,
+                            "users",
+                            user.uid
+                        );
+
+
+                    const userSnapshot =
+                        await getDoc(userRef);
+
+
+                    /*
+                     * إنشاء بيانات المستخدم
+                     * إذا كان أول دخول له.
+                     */
+
+                    if (
+                        !userSnapshot.exists()
+                    ) {
+
+                        await setDoc(
+                            userRef,
+                            {
+
+                                uid:
+                                    user.uid,
+
+                                name:
+                                    user.displayName ||
+                                    "مستخدم Google",
+
+                                phone:
+                                    "",
+
+                                email:
+                                    user.email ||
+                                    "",
+
+                                photoURL:
+                                    user.photoURL ||
+                                    "",
+
+                                provider:
+                                    "google",
+
+                                role:
+                                    "user",
+
+                                createdAt:
+                                    serverTimestamp()
+
+                            }
+                        );
+
+                    }
+
+
+                    const finalSnapshot =
+                        await getDoc(userRef);
+
+
+                    const userData =
+                        finalSnapshot.data();
+
+
+                    showMessage(
+                        "✅ تم تسجيل الدخول باستخدام Google",
+                        true
+                    );
+
+
+                    setTimeout(() => {
+
+                        if (
+                            userData &&
+                            userData.role === "admin"
+                        ) {
+
+                            window.location.href =
+                                "admin.html";
+
+                        } else {
+
+                            window.location.href =
+                                "store.html";
+
+                        }
+
+                    }, 500);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Google Login Error:",
+                        error
+                    );
+
+
+                    if (
+                        error.code ===
+                        "auth/popup-closed-by-user"
+                    ) {
+
+                        showMessage(
+                            "❌ تم إغلاق نافذة Google."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/popup-blocked"
+                    ) {
+
+                        showMessage(
+                            "❌ المتصفح منع نافذة Google."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/account-exists-with-different-credential"
+                    ) {
+
+                        showMessage(
+                            "❌ هذا البريد مرتبط بطريقة تسجيل دخول أخرى."
+                        );
+
+                    } else if (
+                        error.code ===
+                        "auth/unauthorized-domain"
+                    ) {
+
+                        showMessage(
+                            "❌ نطاق الموقع غير مضاف إلى Firebase Authorized Domains."
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "❌ حدث خطأ أثناء تسجيل الدخول باستخدام Google."
+                        );
+
+                    }
+
+
+                } finally {
+
+                    googleLoginBtn.disabled = false;
+
+
+                    googleLoginBtn.innerHTML = `
+                        <span class="bdawy-google-icon">
+                            G
+                        </span>
+
+                        <span class="bdawy-google-text">
+                            تسجيل الدخول باستخدام Google
+                        </span>
+                    `;
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           PASSWORD VISIBILITY
+        ===================================================== */
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    password.type ===
+                    "password"
+                ) {
+
+                    password.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                } else {
+
+                    password.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           AUDIO
+        ===================================================== */
+
+        const siteAudio =
+            document.getElementById(
+                "siteAudio"
+            );
+
+
+        document.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    siteAudio &&
+                    siteAudio.paused
+                ) {
+
+                    siteAudio.volume =
+                        0.25;
+
+                    siteAudio.play()
+                        .catch(() => {});
+
+                }
+
+            },
+            {
+                once: true
+            }
+        );
+
+    </script>
+
+
+    <!-- SERVICE WORKER -->
+
+    <script>
+
+        if (
+            "serviceWorker" in navigator
+        ) {
+
+            window.addEventListener(
+                "load",
+                () => {
+
+                    navigator.serviceWorker
+                        .register("./sw.js")
+                        .catch(
+                            error => console.log(
+                                "SW Error:",
+                                error
+                            )
+                        );
+
+                }
+            );
+
+        }
+
+    </script>
+
 </body>
 
 </html>
